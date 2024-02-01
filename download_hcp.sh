@@ -2,6 +2,7 @@
 
 subjectlist="subjects.txt"
 
+# Download necessary HCP values from HCP using aws
 while read -r subject;
 do
     mkdir -p hcp/"$subject"

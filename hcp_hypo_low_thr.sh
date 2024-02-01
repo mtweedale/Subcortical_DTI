@@ -2,15 +2,18 @@
 
 module load StdEnv/2020 gcc/9.3.0 cuda/11.0 fsl/6.0.4 afni/23.1.08
 
+# Define variables for TractoFlow results and resampled low threshold mask results
 SUBJ="/home/mtweed/scratch/tractoflow_hcp_dwi/results"
 HYPO="/home/mtweed/scratch/tractoflow_hcp_dwi/hypo_bin_resampled_low_thr"
 
 mkdir -p subject_rois_low_thr
 cd subject_rois_low_thr
 
+# Iterate through each subject
 for subj in "$SUBJ"/*; do
     subj_name="${subj##*/}"
     subj_name="${subj_name%%.*}"
+    # Iterate through each ROI of the hypothalamus
     for hypo in "$HYPO"/*; do
 	hypo_roi="${hypo##*/}"
 	hypo_roi="${hypo_roi%%.*}"
@@ -20,6 +23,7 @@ for subj in "$SUBJ"/*; do
 	    mkdir -p fa_rois
 	    mkdir -p md_rois
 	    mkdir -p rd_rois
+	    # Multiply patient DTI NIfTI with ROI hypothalamus mask
 	    cd "/home/mtweed/scratch/tractoflow_hcp_dwi/subject_rois_low_thr/ad_rois"
 	    fslmaths "${subj}/${subj_name}__ad_mni_152_2009c_nlsym.nii.gz" -mul "$hypo" "${subj_name}_ad_${hypo_roi}.nii.gz"
     	    cd "/home/mtweed/scratch/tractoflow_hcp_dwi/subject_rois_low_thr/fa_rois"
