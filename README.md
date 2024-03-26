@@ -53,3 +53,9 @@
 #Calculate regressions for HCP non-binarized hypothalamic data
 #scatter_plots_HCP.ipynb
 
+#All scatter plots for the HCP data
+#HCP_all_scatter_plots.ipynb
+
+#All scatter plots for the UKBB data
+#UKBB_all_scatter_plots.ipynb
+
